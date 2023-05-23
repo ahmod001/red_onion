@@ -12,8 +12,8 @@ const getDefaultMeal = () => {
   if (currentTime < 11) {
     // Set breakfast as default if current time is before 11 AM
     return 'breakfast';
-  } else if (currentTime < 16) {
-    // Set lunch as default if current time is before 4 PM
+  } else if (currentTime < 18) {
+    // Set lunch as default if current time is before 6 PM
     return 'lunch';
   } else {
     // Set dinner as default for any other time

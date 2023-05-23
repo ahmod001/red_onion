@@ -1,33 +1,56 @@
-import { } from 'react';
-import { Card, CardActionArea, CardContent, CardMedia } from '@mui/material';
-import employee_1 from "../../assets/images/why_us/employee_1.png";
-import bus from "../../assets/images/icons/bus.png";
+import { useState } from 'react';
+import { Button, Card, CardActionArea, CardContent, CardMedia } from '@mui/material';
 import { hoverEffectStyle } from "../Card/Card";
 
-const AboutUsCard = () => {
+
+const AboutUsCard = ({ ourInfo }) => {
+    const { title, description, banner_img, icon } = ourInfo;
+
+    const [isFullDescriptionVisible, setIsFullDescriptionVisible] = useState(false);
+
     return (
-        <Card sx={{ ...hoverEffectStyle, maxWidth: 344 }}>
-                {/* Banner Img */}
-                <CardMedia
-                    component="img"
-                    height="140"
-                    image={employee_1}
-                    alt="green iguana"
-                />
-                <CardContent sx={{px: 2}}>
-                    <div className='flex space-x-3.5'>
-                        {/* Icon */}
-                        <img src={bus} className='icon-image h-9' alt="" />
+        <Card sx={{ ...hoverEffectStyle, maxWidth: 365, height: 'fit-content' }}>
+            {/* Banner Img */}
+            <CardActionArea>
+                <img src={banner_img} className='max-h-96 mx-auto' alt={title} />
+            </CardActionArea>
 
-                        {/* Texts */}
-                        <div className='space-y-2'>
-                            <h4 className='tracking-wide'>Fast Delivery</h4>
+            <CardContent sx={{ px: 2 }}>
+                <div className='flex lg:space-x-4 space-x-3'>
 
-                            <p className='text-sm text-gray-800 tracking-wider'> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam dignissimos quidem excepturi corporis eligendi sint odio dolorum esse, consequuntur hic consequatur doloribus eum, dolorem aut nobis quis dicta maxime asperiores.
-                            </p>
-                        </div>
+                    {/* Icon */}
+                    <img src={icon} className='icon-image lg:h-9 h-7' />
+
+                    <div className='space-y-1.5'>
+                        {/* Title */}
+                        <h4 className='tracking-wide lg:text-base text-sm font-semibold lg:font-normal lg:text-black text-gray-700'>{title}</h4>
+
+                        {/* Description: Max Text_Length <= 185 Characters */}
+                        <p className='text-sm lg:text-gray-700 sm:text-black text-gray-700  text-justify '>
+
+                            {!isFullDescriptionVisible ?
+                                description.slice(0, 100)
+                                : description.slice(0, 185)}
+                        </p>
+
+                        {/* SeeMore/Less Clip button  */}
+                        {isFullDescriptionVisible ?
+                            <Button
+                                onClick={() => setIsFullDescriptionVisible(!isFullDescriptionVisible)}
+                                sx={{ textTransform: 'capitalize' }}
+                                size='small'>
+                                See Less
+                            </Button>
+
+                            : <Button
+                                onClick={() => setIsFullDescriptionVisible(!isFullDescriptionVisible)}
+                                sx={{ textTransform: 'capitalize' }}
+                                size='small'>
+                                See More
+                            </Button>}
                     </div>
-                </CardContent>
+                </div>
+            </CardContent>
         </Card>
     );
 };
