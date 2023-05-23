@@ -1,36 +1,19 @@
 import styled from '@emotion/styled';
 import { Fab, InputBase, alpha } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useState } from 'react';
+import { useRef } from 'react';
+import { allMeals } from "../../assets/FakeData/FakeData";
 
-const foods = [
-    {
-        id: 0,
-        name: 'capachino',
-    },
-    {
-        id: 1,
-        name: 'apachino',
-    },
-    {
-        id: 3,
-        name: 'capachinooo',
-    },
-    {
-        id: 4,
-        name: 'zozo',
-    }
-]
-
-const SearchBar = () => {
-    const [searchPrompt, setSearchPrompt] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+const SearchBar = ({ setSearchResults }) => {
+    const inputRef = useRef(null);
 
     // Search Btn handler 
     const handleSearch = () => {
-        setSearchResults(foods.filter(food => {
-            return searchPrompt && food.name.includes(searchPrompt)
+        const searchPrompt = inputRef.current.value;
 
+        setSearchResults(allMeals.filter(meal => {
+            const mealName = meal.name.toLowerCase();
+            return mealName.includes(searchPrompt.toLowerCase());
         }))
     }
 
@@ -58,7 +41,6 @@ const SearchBar = () => {
         padding: theme.spacing(0, 2),
         height: '100%',
         position: 'absolute',
-        pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -83,18 +65,18 @@ const SearchBar = () => {
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
+
             <StyledInputBase
-                onBlur={(e) => setSearchPrompt(e.target.value)}
-                placeholder="Search food items..."
-                inputProps={{ 'aria-label': 'search' }}
-            />
+                inputRef={inputRef}
+                autoFocus
+                placeholder="Search meal items..."
+                inputProps={{ 'aria-label': 'search' }} />
 
             {/* Search Button */}
-            <Fab
-                onClick={handleSearch}
-                sx={{ marginLeft: 'auto', px: 2, textTransform: 'capitalize', boxShadow: 'none', ":active": { boxShadow: 'none' } }}
+            <Fab onClick={handleSearch}
+                sx={{ marginLeft: 'auto', px: 2, py: 2.25, textTransform: 'capitalize', boxShadow: 'none', ":active": { boxShadow: 'none' } }}
                 variant="extended"
-                size="small"
+                size='small'
                 color='error'>
                 Search
             </Fab>

@@ -53,6 +53,7 @@ const Navbar = (props) => {
                                 title='Cart'>
                                 <span>
                                     <IconButton
+                                        onClick={() => navigate('/cart')}
                                         disabled={!isFoodAddedToCart}
                                         aria-label="Cart">
                                         <ShoppingCartIcon fontSize='inherit' />
