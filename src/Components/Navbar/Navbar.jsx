@@ -27,8 +27,11 @@ function ElevationScroll(props) {
 }
 
 const Navbar = (props) => {
+     // Scroll Error Fixed
+     window.scroll({ top: 0 });
+     
     const navigate = useNavigate();
-    const [isFoodAddedToCart, setIsFoodAddedToCart] = React.useState(false)
+    const [isFoodAddedToCart, setIsFoodAddedToCart] = React.useState(!false)
     const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false)
 
     return (

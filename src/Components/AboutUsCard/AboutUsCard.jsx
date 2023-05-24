@@ -26,7 +26,7 @@ const AboutUsCard = ({ ourInfo }) => {
                         <h4 className='tracking-wide lg:text-base text-sm font-semibold lg:font-normal lg:text-black text-gray-700'>{title}</h4>
 
                         {/* Description: Max Text_Length <= 185 Characters */}
-                        <p className='text-sm lg:text-gray-700 sm:text-black text-gray-700  text-justify '>
+                        <p className='text-sm lg:text-gray-700 sm:text-black text-gray-700  text-justify'>
 
                             {!isFullDescriptionVisible ?
                                 description.slice(0, 100)
