@@ -1,24 +1,39 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
-import { allMeals } from '../../assets/FakeData/FakeData';
-import { Button, Fade, IconButton, Tooltip } from '@mui/material';
+import { allMeals, localStorageHandler } from '../../assets/FakeData/FakeData';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Add, Remove } from '@mui/icons-material';
 import GoBackButton from '../GoBackButton/GoBackButton';
+import QuantityController from '../QuantityController/QuantityController';
+import { Button, Fade } from '@mui/material';
+import { cartContext, updateCartContext } from '../../App';
 
 const OrderMeal = () => {
-
+    // Get clicked Meal by its Id
     const { mealId } = useParams();
-    const navigate = useNavigate();
     const meal = allMeals.find(meal => meal.id === Number.parseInt(mealId));
     const { id, name, description, img, price } = meal;
 
     const [mealQuantity, setMealQuantity] = useState(1);
+    const [cart, setCart] = useContext(cartContext);
+    const [updatedCart, setUpdatedCart] = useContext(updateCartContext)
+
+    // Add To Cart Handler
+    const handleAddToCart = () => {
+        const orderedMeal = {
+            ...meal,
+            total: price * mealQuantity,
+            quantity: mealQuantity
+        }
+        const newCart = cart.filter(cartItem => cartItem.id !== orderedMeal.id)
+        setCart([orderedMeal, ...newCart])
+        localStorageHandler('set', 'cart', [orderedMeal, ...newCart])
+    }
 
     return (
         <Fade in={true}
             onDurationChange={() => 1500}>
             <main className=' min-h-screen container space-y-6 px-4 mb-10 mx-auto'>
+
                 {/* GoBack Button */}
                 <GoBackButton navigate={'/home'} />
 
@@ -44,14 +59,15 @@ const OrderMeal = () => {
                                     </h1>
 
                                     {/* Quantity Count */}
-                                    <Quantity
+                                    <QuantityController
+                                        cartItemCard={false}
                                         mealQuantity={mealQuantity}
                                         setMealQuantity={setMealQuantity} />
                                 </div>
 
                                 {/* Add To Cart Button */}
                                 <Button
-                                    onClick={() => navigate('/cart')}
+                                    onClick={handleAddToCart}
                                     sx={{ borderRadius: 20, textTransform: 'capitalize' }}
                                     size={'large'}
                                     color='error'
@@ -75,43 +91,5 @@ const OrderMeal = () => {
         </Fade>
     );
 };
-
-// This sub_component manages the meal quantity
-const Quantity = ({ mealQuantity, setMealQuantity }) => {
-
-    // Event Handlers
-    const handleReduce = () => (
-        mealQuantity > 1 && setMealQuantity(mealQuantity - 1)
-    )
-    const handleIncrease = () => setMealQuantity(mealQuantity + 1)
-
-    return (
-        <Tooltip
-            placement='top'
-            title='Quantity'>
-            <div className='flex space-x-3'>
-
-                {/* Reduce Quantity */}
-                <IconButton
-                    disabled={mealQuantity <= 1}
-                    onClick={handleReduce}>
-                    <Remove fontSize='inherit' />
-                </IconButton>
-
-                {/* Current Quantity*/}
-                <h1 className='my-auto sm:text-2xl text-xl'>
-                    {mealQuantity}
-                </h1>
-
-                {/* Increase Quantity */}
-                <IconButton
-                    onClick={handleIncrease}
-                    color='error'>
-                    <Add fontSize='inherit' />
-                </IconButton>
-            </div>
-        </Tooltip>
-    )
-}
 
 export default OrderMeal;

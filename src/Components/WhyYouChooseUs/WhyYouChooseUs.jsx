@@ -1,5 +1,5 @@
 import { } from 'react';
-import AboutUsCard from '../AboutUsCard/AboutUsCard';
+import AboutUsCard from './AboutUsCard/AboutUsCard';
 import employee_1 from "../../assets/images/why_us/employee_1.png"
 import cook_2 from "../../assets/images/why_us/cook_2.png"
 import customer_3 from "../../assets/images/why_us/customer_3.png"

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import banner_img from '../../assets/images/banner.png';
-import SearchBar from '../SearchBar/SearchBar';
+import SearchBar from './SearchBar/SearchBar';
 import Card from "../Card/Card";
 import { Fade, IconButton } from '@mui/material';
 import { Close } from "@mui/icons-material";

@@ -7,6 +7,7 @@ import logo_dark from "../../assets/images/logo_dark.png";
 import { Fab, IconButton, Tooltip } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
+import { cartContext } from '../../App';
 
 // This function Applies a visual effect to the navbar 
 // when scrolling.
@@ -29,10 +30,11 @@ function ElevationScroll(props) {
 const Navbar = (props) => {
      // Scroll Error Fixed
      window.scroll({ top: 0 });
-     
+
+    const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false);
+    const [cart, setCart] = React.useContext(cartContext);
+
     const navigate = useNavigate();
-    const [isFoodAddedToCart, setIsFoodAddedToCart] = React.useState(!false)
-    const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false)
 
     return (
         <React.Fragment>
@@ -57,7 +59,7 @@ const Navbar = (props) => {
                                 <span>
                                     <IconButton
                                         onClick={() => navigate('/cart')}
-                                        disabled={!isFoodAddedToCart}
+                                        disabled={cart.length < 1}
                                         aria-label="Cart">
                                         <ShoppingCartIcon fontSize='inherit' />
                                     </IconButton>

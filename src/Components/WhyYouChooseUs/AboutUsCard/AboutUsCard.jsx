@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Button, Card, CardActionArea, CardContent, CardMedia } from '@mui/material';
-import { hoverEffectStyle } from "../Card/Card";
+import { Button, Card, CardActionArea, CardContent } from '@mui/material';
+import { hoverEffectStyle } from "../../Card/Card";
 
 
 const AboutUsCard = ({ ourInfo }) => {

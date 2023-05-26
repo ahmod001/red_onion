@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Fab, InputBase, alpha } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useRef } from 'react';
-import { allMeals } from "../../assets/FakeData/FakeData";
+import { allMeals } from "../../../assets/FakeData/FakeData";
 
 const SearchBar = ({ setSearchResults }) => {
     const inputRef = useRef(null);
