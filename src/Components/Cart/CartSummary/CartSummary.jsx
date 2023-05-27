@@ -1,16 +1,23 @@
 import { Button, Fade } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import CartItemCard from '../CartItemCard/CartItemCard';
 import { cartContext, updateCartContext } from "../../../App";
+import { deliveryFormContext } from '../Cart';
 
 const CartSummary = () => {
+
+    // Get States From Context
     const [cart, setCart] = useContext(cartContext);
-    const [updatedCart, usetUpdatedCart] = useContext(updateCartContext);
+    const [updatedCart, setUpdatedCart] = useContext(updateCartContext);
+    const { isUserFilledForm, userDeliveryDetails } = useContext(deliveryFormContext);
+    const [deliveryDetails, setDeliveryDetails] = userDeliveryDetails;
+    const [isUserFilledDeliveryForm, setIsUserFilledDeliveryForm] = isUserFilledForm;
 
     // Generated fake estimated delivery time
     const [deliveryTime, setDeliveryTime] = useState(Math.round(Math.random() * 90) + 10)
 
     /// Calculating The Bill ///
+
     // Sub-Total
     const subTotal = updatedCart.reduce((total, cartItem) => Number.parseInt(total + cartItem.total), 0)
     // Tax 2.50%
@@ -21,15 +28,27 @@ const CartSummary = () => {
     const total = (subTotal + deliveryCharge + tax).toFixed(2);
 
     return (
-        <div className='col space-y-6 2xl:max-w-[25rem] lg:max-w-[21rem] md:max-w-[24rem] w-full max-w-[27rem] mx-auto'>
+        <div className='col space-y-6 2xl:max-w-[25rem] lg:max-w-[21rem]  w-full max-w-[25rem] mx-auto'>
             {/* Delivery details */}
             <ul className="text-sm space-y-3">
                 {/* Restaurant Location */}
                 <li>From <strong>The Rustic Plate Restaurant</strong></li>
+
                 {/* Estimated Delivery Time */}
-                <li>Estimated delivery time: ... Minutes</li>
+                <li>Estimated delivery time:
+
+                    {!isUserFilledDeliveryForm ?
+                        ` ${deliveryTime} ` : ' ... '}
+
+                    Minutes</li>
+
                 {/* User Location */}
-                <li>To ...<strong></strong></li>
+                <li>To
+                    <strong>
+                        {!isUserFilledDeliveryForm ?
+                            ` ${deliveryDetails.address} ` : ' ... '}
+                    </strong>
+                </li>
             </ul>
 
             {/* Cart_Item Cards*/}
@@ -59,7 +78,7 @@ const CartSummary = () => {
 
             {/* Place Order Button */}
             <Button fullWidth
-                disabled={true}
+                disabled={isUserFilledDeliveryForm}
                 sx={{ textTransform: 'capitalize' }}
                 variant='contained'
                 color='error'>

@@ -51,7 +51,7 @@ const QuantityController = ({ cartItemCard, meal, mealQuantity, setMealQuantity 
 
             const newUpdatedCart = updatedCart.filter(cartItem => cartItem.id !== updateMeal.id)
             setUpdatedCart([updateMeal, ...newUpdatedCart])
-            
+
             // Set CartItem on In localStorage
             localStorageHandler('set', 'cart', [updateMeal, ...newUpdatedCart])
         }
@@ -62,7 +62,7 @@ const QuantityController = ({ cartItemCard, meal, mealQuantity, setMealQuantity 
         <Tooltip
             placement='top'
             title='Quantity'>
-            <div className={`flex my-auto ${cartItemCard? 'space-x-1': 'space-x-3'}`}>
+            <div className={`flex my-auto ${cartItemCard ? 'md:space-x-1.5 space-x-2' : 'space-x-3'}`}>
 
                 {/* Reduce Quantity */}
                 <IconButton
@@ -73,7 +73,7 @@ const QuantityController = ({ cartItemCard, meal, mealQuantity, setMealQuantity 
                 </IconButton>
 
                 {/* Current Quantity*/}
-                <h1 className={`my-auto ${cartItemCard ? 'text-lg' : 'sm:text-2xl text-xl'}`}>
+                <h1 className={`my-auto ${cartItemCard ? 'lg:text-lg text-xl' : 'text-xl lg:text-2xl'}`}>
                     {cartItemCard ?
                         mealQuantity.toString().padStart(2, '0')
                         : mealQuantity}

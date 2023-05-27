@@ -2,13 +2,14 @@ import { TextField } from '@mui/material';
 import React from 'react';
 
 const InputField = ({ field, register, errors }) => {
-    const { name, placeholder, required } = field;
+    const { name, placeholder, required , default_value} = field;
 
     return (
         <TextField
             {...register(name, { required: required || false })}
             fullWidth
             hiddenLabel
+            defaultValue={default_value}
             placeholder={placeholder || ''}
             error={!!errors[name]}
             helperText={`${errors[name] ? 'This Field Required' : ''}`}

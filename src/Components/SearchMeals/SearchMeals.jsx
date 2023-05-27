@@ -13,12 +13,13 @@ const SearchMeals = () => {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
+        boxShadow: '0 -12px 12px lightgray'
     }
     const [searchResults, setSearchResults] = useState([]);
 
     return (
         <section>
-            <div className='md:h-96 h-80 flex align-middle justify-center'
+            <div className='md:h-96 h-72 flex align-middle justify-center'
                 style={backgroundStyle}>
                 {/* Title */}
                 <div className='m-auto sm:space-y-5 space-y-3'>
