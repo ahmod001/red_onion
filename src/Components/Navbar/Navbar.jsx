@@ -28,8 +28,8 @@ function ElevationScroll(props) {
 }
 
 const Navbar = (props) => {
-     // Scroll Error Fixed
-     window.scroll({ top: 0 });
+    // Scroll Error Fixed
+    window.scroll({ top: 0 });
 
     const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false);
     const [cart, setCart] = React.useContext(cartContext);
@@ -78,6 +78,7 @@ const Navbar = (props) => {
 
                                     // Login 
                                     : <Fab
+                                        onClick={() => navigate('/login')}
                                         sx={{ px: 2, textTransform: 'capitalize' }}
                                         variant="extended"
                                         size="small"

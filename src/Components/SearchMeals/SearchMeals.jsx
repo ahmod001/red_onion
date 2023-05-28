@@ -5,16 +5,16 @@ import Card from "../Card/Card";
 import { Fade, IconButton } from '@mui/material';
 import { Close } from "@mui/icons-material";
 
+// Custom Styles For background_Banner 
+const backgroundStyle = {
+    backgroundColor: '#fcf4e0',
+    backgroundImage: `url(${banner_img})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+}
+
 const SearchMeals = () => {
-    // Custom Styles For background_Banner 
-    const backgroundStyle = {
-        backgroundColor: '#fcf4e0',
-        backgroundImage: `url(${banner_img})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        boxShadow: '0 -12px 12px lightgray'
-    }
     const [searchResults, setSearchResults] = useState([]);
 
     return (
@@ -37,7 +37,7 @@ const SearchMeals = () => {
                     <div className='rounded-md shadow-md mb-8 mt-5 p-2 space-y-5 container mx-auto'>
                         {/* Remove all search results button */}
                         <div className='flex space-x-2'>
-                            <IconButton onClick={()=> setSearchResults([])}>
+                            <IconButton onClick={() => setSearchResults([])}>
                                 <Close fontSize='inherit' />
                             </IconButton>
 

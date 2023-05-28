@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import InputField from '../../InputField/InputField';
+import InputField, { Field } from '../../InputField/InputField';
 import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { localStorageHandler } from '../../../assets/FakeData/FakeData';
@@ -10,9 +10,9 @@ const DeliveryDetailsForm = () => {
     const { isUserFilledForm, userDeliveryDetails } = useContext(deliveryFormContext);
     const [isUserFilledDeliveryForm, setIsUserFilledDeliveryForm] = isUserFilledForm;
     const [deliveryDetails, setDeliveryDetails] = userDeliveryDetails;
-   const { name, email, buisness_name, address } =   deliveryDetails;
+    const { name, email, buisness_name, address } = deliveryDetails;
 
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     // Form Submit Handler
     const onSubmit = data => {
@@ -37,35 +37,11 @@ const DeliveryDetailsForm = () => {
                 className='lg:space-y-5 space-y-4'
                 onSubmit={handleSubmit(onSubmit)} >
                 {/* Input Fields */}
-                {
-                    [
-                        {
-                            id: 0,
-                            name: 'name',
-                            default_value: name,
-                            required: true,
-                            placeholder: 'Name*'
-                        },
-                        {
-                            id: 1,
-                            name: 'email',
-                            default_value: email,
-                            required: true,
-                            placeholder: 'Email*'
-                        },
-                        {
-                            id: 2,
-                            name: 'address',
-                            default_value: address,
-                            required: true,
-                            placeholder: 'Address*'
-                        },
-                        {
-                            id: 3,
-                            name: 'buisness_name',
-                            default_value: buisness_name,
-                            placeholder: 'Business Name (optional)'
-                        },
+                {[
+                        new Field(0, 'name', 'Full Name*', name, true),
+                        new Field(1, 'email', 'Email*', email, true),
+                        new Field(2, 'address', 'Address*', address, true),
+                        new Field(3, 'buisness_name', 'Business Name (optional)', buisness_name, false),
 
                     ].map(field => (
                         <InputField

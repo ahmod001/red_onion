@@ -9,6 +9,7 @@ import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import Cart from "./Components/Cart/Cart";
 import { createContext, useState } from "react";
 import { localStorageHandler } from "./assets/FakeData/FakeData";
+import Login from "./Components/Login/Login";
 
 export const cartContext = createContext();
 export const updateCartContext = createContext();
@@ -34,7 +35,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/meal/:mealId" element={<OrderMeal />} />
-
+                <Route path="/login" element={<Login />} />
                 {/* Private Route */}
                 <Route element={<PrivateRoute />}>
                   <Route path="/cart" element={<Cart />} />
