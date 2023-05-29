@@ -3,6 +3,8 @@ import { useContext, useMemo, useState } from 'react';
 import CartItemCard from '../CartItemCard/CartItemCard';
 import { cartContext, updateCartContext } from "../../../App";
 import { deliveryFormContext } from '../Cart';
+import { useNavigate } from 'react-router-dom';
+import { localStorageHandler } from '../../../assets/FakeData/FakeData';
 
 const CartSummary = () => {
 
@@ -13,11 +15,13 @@ const CartSummary = () => {
     const [deliveryDetails, setDeliveryDetails] = userDeliveryDetails;
     const [isUserFilledDeliveryForm, setIsUserFilledDeliveryForm] = isUserFilledForm;
 
+    const navigate = useNavigate();
+
+
     // Generated fake estimated delivery time
     const [deliveryTime, setDeliveryTime] = useState(Math.round(Math.random() * 90) + 10)
 
     /// Calculating The Bill ///
-
     // Sub-Total
     const subTotal = updatedCart.reduce((total, cartItem) => Number.parseInt(total + cartItem.total), 0)
     // Tax 2.50%
@@ -26,6 +30,21 @@ const CartSummary = () => {
     const deliveryCharge = cart.length > 0 ? 2.99 : 0;
     // Total 
     const total = (subTotal + deliveryCharge + tax).toFixed(2);
+
+    // Order Placed Handler
+    const handlePlaceOrder = () => {
+        navigate('/track-order')
+        
+        const orderDetails = {
+            delivery: {
+                restaurant_location: 'The Rustic Plate Restaurant, Paris',
+                customer_location: deliveryDetails.address
+            },
+            cart: updatedCart.map(meal => ({ name: meal.name, quantity: meal.quantity, total: meal.total })),
+            total_bill: total
+        }
+        localStorageHandler('set', 'orderDetails', orderDetails)
+    }
 
     return (
         <div className='col space-y-6 2xl:max-w-[25rem] lg:max-w-[21rem]  w-full max-w-[25rem] mx-auto'>
@@ -77,7 +96,9 @@ const CartSummary = () => {
             </table>
 
             {/* Place Order Button */}
-            <Button fullWidth
+            <Button
+                fullWidth
+                onClick={handlePlaceOrder}
                 disabled={isUserFilledDeliveryForm}
                 sx={{ textTransform: 'capitalize' }}
                 variant='contained'

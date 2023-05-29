@@ -16,7 +16,7 @@ const Login = () => {
     }
 
     return (
-        <main className='min-h-screen '>
+        <main className='h-screen'>
             {/* Show Error...
             If authentication fails */}
             <MassagePopup
@@ -25,7 +25,7 @@ const Login = () => {
                 open={authenticationError !== ''}
                 handleClose={handleErrorPopup} />
 
-            <section className='container px-4 space-y-12 sm:space-y-20 pt-36 sm:pt-5 '>
+            <section className='container pt-14 sm:pt-10 px-4 m-auto space-y-12 sm:space-y-16'>
                 {/* Brand Icon */}
                 <img className='max-h-12 mx-auto sm:max-h-14'
                     src={logo_dark}
@@ -33,7 +33,7 @@ const Login = () => {
 
                 {/* Form */}
                 <div className='text-center space-y-4'>
-                        <LoginForm isSignIn ={isSignIn} 
+                    <LoginForm isSignIn={isSignIn}
                         showError={setAuthenticationError} />
 
                     {/* Toggle Form */}

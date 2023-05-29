@@ -7,7 +7,8 @@ import logo_dark from "../../assets/images/logo_dark.png";
 import { Fab, IconButton, Tooltip } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from 'react-router-dom';
-import { cartContext } from '../../App';
+import { cartContext, userContext } from '../../App';
+import { localStorageHandler } from '../../assets/FakeData/FakeData';
 
 // This function Applies a visual effect to the navbar 
 // when scrolling.
@@ -31,10 +32,19 @@ const Navbar = (props) => {
     // Scroll Error Fixed
     window.scroll({ top: 0 });
 
-    const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(false);
+    // Get States From Context
     const [cart, setCart] = React.useContext(cartContext);
+    const userInfo = localStorageHandler('get', 'userInfo')
+    const { isUserLoggedInState } = React.useContext(userContext);
+    const [isUserLoggedIn, setIsUserLoggedIn] = isUserLoggedInState;
 
     const navigate = useNavigate();
+
+    // Logout Handler 
+    const handleLogOut = () => {
+        setIsUserLoggedIn(!isUserLoggedIn)
+        localStorageHandler('remove', 'userInfo')
+    }
 
     return (
         <React.Fragment>
@@ -66,25 +76,27 @@ const Navbar = (props) => {
                                 </span>
                             </Tooltip>
                             <>
-                                {isUserLoggedIn ?
-                                    // LogOut
+                                {!isUserLoggedIn ?
+                                    // Login  
                                     <Fab
-                                        sx={{ px: 2, textTransform: 'capitalize' }}
-                                        variant="extended"
-                                        size="small"
-                                        color='error'>
-                                        Logout
-                                    </Fab>
-
-                                    // Login 
-                                    : <Fab
                                         onClick={() => navigate('/login')}
                                         sx={{ px: 2, textTransform: 'capitalize' }}
                                         variant="extended"
                                         size="small"
                                         color='error'>
                                         Login
-                                    </Fab>}
+                                    </Fab>
+
+                                    // LogOut
+                                    : <Fab
+                                        onClick={handleLogOut}
+                                        sx={{ px: 2, textTransform: 'capitalize' }}
+                                        variant="extended"
+                                        size="small"
+                                        color='error'>
+                                        Logout
+                                    </Fab>
+                                }
                             </>
                         </div>
                     </div>

@@ -10,46 +10,59 @@ import Cart from "./Components/Cart/Cart";
 import { createContext, useState } from "react";
 import { localStorageHandler } from "./assets/FakeData/FakeData";
 import Login from "./Components/Login/Login";
+import TrackOrder from "./Components/TrackOrder/TrackOrder";
 
 export const cartContext = createContext();
 export const updateCartContext = createContext();
+export const userContext = createContext();
 
 function App() {
-  const getCartItemsFromLocalStorage = localStorageHandler('get', 'cart')
+
+  // Set cart-items from LocalStorage
+  const getCartItemsFromLocalStorage = localStorageHandler('get', 'cart');
   const [cart, setCart] = useState(getCartItemsFromLocalStorage ? getCartItemsFromLocalStorage : [])
 
   // This State used for Cart_summary calculation
   const [updatedCart, setUpdatedCart] = useState([])
   useMemo(() => setUpdatedCart(cart), [cart])
 
-  return (
-    <cartContext.Provider value={[cart, setCart]} >
-      <updateCartContext.Provider value={[updatedCart, setUpdatedCart]}>
-        <BrowserRouter>
-          <Navbar />
-          <Fade
-            onDurationChange={() => 1500}
-            in={true}>
-            <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/meal/:mealId" element={<OrderMeal />} />
-                <Route path="/login" element={<Login />} />
-                {/* Private Route */}
-                <Route element={<PrivateRoute />}>
-                  <Route path="/cart" element={<Cart />} />
-                </Route>
+  // LogIn Manage from here
+  const userInfo = localStorageHandler('get', 'userInfo')
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(userInfo ? true : false)
 
-                {/* Home component will show if there any unknown path entered */}
-                <Route path="/*" element={<Home />} />
-              </Routes>
-            </main>
-          </Fade>
-          <Footer />
-        </BrowserRouter>
-      </updateCartContext.Provider>
-    </cartContext.Provider >
+  return (
+    <userContext.Provider value={{ isUserLoggedInState: [isUserLoggedIn, setIsUserLoggedIn] }}>
+      <cartContext.Provider value={[cart, setCart]}>
+        <updateCartContext.Provider value={[updatedCart, setUpdatedCart]}>
+          <BrowserRouter>
+            <Navbar />
+            <Fade
+              onDurationChange={() => 1500}
+              in={true}>
+
+              <main className="min-h-screen">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/meal/:mealId" element={<OrderMeal />} />
+                  <Route path="/login" element={<Login />} />
+
+                  {/* Private Route */}
+                  <Route element={<PrivateRoute />}>
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/track-order" element={<TrackOrder />} />
+                  </Route>
+
+                  {/* Home component will show if there any unknown path entered */}
+                  <Route path="/*" element={<Home />} />
+                </Routes>
+              </main>
+            </Fade>
+            <Footer />
+          </BrowserRouter>
+        </updateCartContext.Provider>
+      </cartContext.Provider >
+    </userContext.Provider>
   )
 }
 
