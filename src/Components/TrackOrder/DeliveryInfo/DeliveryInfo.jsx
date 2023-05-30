@@ -56,11 +56,15 @@ const DeliveryInfo = ({ delivery }) => {
 
             {/* Contact */}
             <div>
-                <Button fullWidth
-                    color='error'
-                    variant='contained'>
-                    Contact
-                </Button>
+                {/* click to  redirect Hasan's mail */}
+                {/* hasan.webdev1@gmail.com */}
+                <a href="mailto:hasan.webdev1@gmail.com">
+                    <Button fullWidth
+                        color='error'
+                        variant='contained'>
+                        Contact
+                    </Button>
+                </a>
             </div>
         </div>
     );

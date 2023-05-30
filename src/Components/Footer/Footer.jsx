@@ -9,11 +9,11 @@ const Footer = () => {
                 <div className=' grid gap-y-4 lg:grid-cols-12  grid-cols-2'>
                     {/* Brand_icon */}
                     <div className='col lg:col-span-7'>
-                            <img
-                                className='h-9 bg-cover'
-                                onLoad={lazy}
-                                src={logo_white}
-                                alt="red_onion" />
+                        <img
+                            className='h-9 bg-cover'
+                            onLoad={lazy}
+                            src={logo_white}
+                            alt="red_onion" />
                     </div>
 
                     {/*  Links*/}
@@ -31,9 +31,13 @@ const Footer = () => {
                 <div className='grid gap-y-9 lg:grid-cols-12 md:grid-cols-2 grid-cols-1'>
                     {/* Copyright*/}
                     <div className='col lg:col-span-7 md:text-start text-center  md:order-first order-last'>
-                        <span className='md:text-gray-400 text-gray-500 text-xs'>
-                           Developed By Ahmod Hasan
-                        </span>
+                        {/* Redirect to Hasan's Github */}
+                        <a href="https://github.com/ahmod001" 
+                        target="_blank" rel="noopener noreferrer">
+                            <span className='md:text-gray-400 text-gray-500 text-xs'>
+                                Developed By Ahmod Hasan
+                            </span>
+                        </a>
                     </div>
 
                     {/* Privacy & Policy */}
