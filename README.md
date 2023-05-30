@@ -24,5 +24,5 @@ Red Onion is a feature-rich meal ordering application that provides users with a
 2. Navigate to the project directory: `cd red_onion`
 3. Install dependencies: `npm install`
 
-#### Developer: Ahmod Hasan
+##### © Developed by Ahmod Hasan
 
