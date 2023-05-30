@@ -15,9 +15,9 @@ const Cart = () => {
 
     useMemo(() => {
         const deliveryDetails = localStorageHandler('get', 'delivery_details');
-        if ( deliveryDetails) {
-            setIsUserFilledDeliveryForm(!isUserFilledDeliveryForm)
-            setDeliveryDetails(deliveryDetails) 
+        if (deliveryDetails) {
+            setIsUserFilledDeliveryForm(true)
+            setDeliveryDetails(deliveryDetails)
         }
     }, [])
 

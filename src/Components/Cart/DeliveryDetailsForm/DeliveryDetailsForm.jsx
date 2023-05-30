@@ -1,24 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import InputField, { Field } from '../../InputField/InputField';
 import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { localStorageHandler } from '../../../assets/FakeData/FakeData';
 import { deliveryFormContext } from '../Cart';
+import { updateCartContext } from '../../../App';
 
 const DeliveryDetailsForm = () => {
     // Get States from Context
     const { isUserFilledForm, userDeliveryDetails } = useContext(deliveryFormContext);
     const [isUserFilledDeliveryForm, setIsUserFilledDeliveryForm] = isUserFilledForm;
     const [deliveryDetails, setDeliveryDetails] = userDeliveryDetails;
+    const [updatedCart, setUpdatedCart] = useContext(updateCartContext);
     const { name, email, buisness_name, address } = deliveryDetails;
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+  
     // Form Submit Handler
     const onSubmit = data => {
         localStorageHandler('set', 'delivery_details', data)
         setDeliveryDetails(data)
-        setIsUserFilledDeliveryForm(!isUserFilledDeliveryForm)
+        setIsUserFilledDeliveryForm(true)
     }
 
     return (
@@ -38,18 +41,18 @@ const DeliveryDetailsForm = () => {
                 onSubmit={handleSubmit(onSubmit)} >
                 {/* Input Fields */}
                 {[
-                        new Field(0, 'name', 'Full Name*', name, true),
-                        new Field(1, 'email', 'Email*', email, true),
-                        new Field(2, 'address', 'Address*', address, true),
-                        new Field(3, 'buisness_name', 'Business Name (optional)', buisness_name, false),
+                    new Field(0, 'name', 'Full Name*', name, true),
+                    new Field(1, 'email', 'Email*', email, true),
+                    new Field(2, 'address', 'Address*', address, true),
+                    new Field(3, 'buisness_name', 'Business Name (optional)', buisness_name, false),
 
-                    ].map(field => (
-                        <InputField
-                            key={field.id}
-                            field={field}
-                            register={register}
-                            errors={errors} />
-                    ))
+                ].map(field => (
+                    <InputField
+                        key={field.id}
+                        field={field}
+                        register={register}
+                        errors={errors} />
+                ))
                 }
 
                 {/* Submit Button */}

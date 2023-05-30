@@ -1,5 +1,5 @@
 import { Button, Fade } from '@mui/material';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import CartItemCard from '../CartItemCard/CartItemCard';
 import { cartContext, updateCartContext } from "../../../App";
 import { deliveryFormContext } from '../Cart';
@@ -15,11 +15,17 @@ const CartSummary = () => {
     const [deliveryDetails, setDeliveryDetails] = userDeliveryDetails;
     const [isUserFilledDeliveryForm, setIsUserFilledDeliveryForm] = isUserFilledForm;
 
-    // Enable Place Order button if there are items in the cart and the delivery form is filled
-    const [isPlaceOrderBtnDisable, setIsPlaceOrderBtnDisable] = useState(!isUserFilledDeliveryForm)
-
-    useMemo(() => updatedCart.length < 1 && setIsPlaceOrderBtnDisable(true), [updatedCart])
     const navigate = useNavigate();
+console.log(isUserFilledDeliveryForm);
+    // H
+    const [isPlaceOrderBtnDisable, setIsPlaceOrderBtnDisable] = useState(true)
+    useMemo(() => {
+        if (updatedCart.length > 0 && isUserFilledDeliveryForm) {
+            setIsPlaceOrderBtnDisable(false)
+        } else {
+            setIsPlaceOrderBtnDisable(true)
+        }
+    }, [updatedCart,isUserFilledDeliveryForm])
 
     // Generated fake estimated delivery time
     const [deliveryTime, setDeliveryTime] = useState(Math.round(Math.random() * 90) + 10)
@@ -36,22 +42,21 @@ const CartSummary = () => {
 
     // Order Placed Handler
     const handlePlaceOrder = () => {
-        navigate('/track-order')
 
-        const orderDetails = {
-            delivery: {
-                restaurant_location: 'The Rustic Plate Restaurant, Paris',
-                customer_location: deliveryDetails.address
-            },
-            cart: updatedCart.map(meal => ({ name: meal.name, quantity: meal.quantity, total: meal.total })),
-            total_bill: total
+        if (updatedCart.length > 0) {
+            navigate('/track-order')
+
+            const orderDetails = {
+                delivery: {
+                    restaurant_location: 'The Rustic Plate Restaurant, Paris',
+                    customer_location: deliveryDetails.address
+                },
+                cart: updatedCart.map(meal => ({ name: meal.name, quantity: meal.quantity, total: meal.total })),
+                total_bill: total
+            }
+            localStorageHandler('set', 'orderDetails', orderDetails)
         }
-        localStorageHandler('set', 'orderDetails', orderDetails)
     }
-
-    // Handle SnackBar 
-    const [isAnyCartItemDeleted, setIsCartItemDeleted] = useState(true);
-    const snackbarPopUpHandler = () => setIsCartItemDeleted(!isAnyCartItemDeleted)
 
     return (
         <div className='col space-y-6 2xl:max-w-[25rem] lg:max-w-[21rem] w-full max-w-[25rem] mx-auto'>

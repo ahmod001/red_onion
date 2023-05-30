@@ -32,30 +32,30 @@ class Meal {
 
 export const fakeMeals = {
     breakfast: [
-        new Meal(0, 'Eggs Bandit', breakfast1, 0.99),
-        new Meal(1, 'Breakfast Sandwich', breakfast2, 1.99),
-        new Meal(2, 'Baked Chicken', breakfast3, 1.49),
-        new Meal(3, 'Bagel and Cream Cheese', breakfast4, 2.99),
-        new Meal(4, 'Full Breakfast Fried Egg Toast Brunch', breakfast5, 3.49),
-        new Meal(5, 'Toast Croissant Fried Egg', breakfast6, 4.99)
+        new Meal(0, 'Eggs Bandit', breakfast1, 8.99),
+        new Meal(1, 'Breakfast Sandwich', breakfast2, 9.99),
+        new Meal(2, 'Baked Chicken', breakfast3, 10.99),
+        new Meal(3, 'Bagel and Cream Cheese', breakfast4, 6.99),
+        new Meal(4, 'Full Breakfast Fried Egg Toast Brunch', breakfast5, 3.99),
+        new Meal(5, 'Toast Croissant Fried Egg', breakfast6, 19.99)
     ],
 
     lunch: [
-        new Meal(6, 'Beef Steak', lunch1, 3.66),
-        new Meal(7, 'Honey-Soy-Glazed Salmon with Peppers', lunch2, 3.99),
-        new Meal(8, 'Tarragon-Rubbed-Salmon', lunch3, 4.99),
-        new Meal(9, 'Indian Lunch', lunch4, 5.99),
-        new Meal(10, 'Fried Chicken Bento', lunch5, 2.99),
-        new Meal(11, 'Healthy Meal Plan', lunch6, 1.99)
+        new Meal(6, 'Beef Steak', lunch1, 15.99),
+        new Meal(7, 'Honey-Soy-Glazed Salmon with Peppers', lunch2, 7.99),
+        new Meal(8, 'Tarragon-Rubbed-Salmon', lunch3, 6.99),
+        new Meal(9, 'Indian Lunch', lunch4, 8.99),
+        new Meal(10, 'Fried Chicken Bento', lunch5, 9.99),
+        new Meal(11, 'Healthy Meal Plan', lunch6, 23.99)
     ],
 
     dinner: [
-        new Meal(12, 'Baked Chicken', dinner1, 3.76),
-        new Meal(13, 'Lemony Salmon Piccata', dinner2, 5.49),
-        new Meal(14, 'Garlic Butter Baked Salmon', dinner3, 1.49),
-        new Meal(15, 'French fries with cheese', dinner4, 2.99),
-        new Meal(16, 'Pork Tenderloin with Quinoa Pilaf', dinner5, 3.49),
-        new Meal(17, 'Salmon with Grapefruit and Lentil Salad', dinner6, 1.49)
+        new Meal(12, 'Baked Chicken', dinner1, 9.99),
+        new Meal(13, 'Lemony Salmon Piccata', dinner2, 10.99),
+        new Meal(14, 'Garlic Butter Baked Salmon', dinner3, 6.99),
+        new Meal(15, 'French fries with cheese', dinner4, 8.99),
+        new Meal(16, 'Pork Tenderloin with Quinoa Pilaf', dinner5, 12.99),
+        new Meal(17, 'Salmon with Grapefruit and Lentil Salad', dinner6, 9.99)
     ]
 }
 
