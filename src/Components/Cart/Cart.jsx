@@ -6,26 +6,25 @@ import CartSummary from './CartSummary/CartSummary';
 import { cartContext } from '../../App';
 import { localStorageHandler } from '../../assets/FakeData/FakeData';
 
-
 export const deliveryFormContext = createContext();
 
 const Cart = () => {
     const [cart, setCart] = useContext(cartContext)
-    const [isUserFilledDeliveryForm, setIsUserFilledDeliveryForm] = useState(true);
+    const [isUserFilledDeliveryForm, setIsUserFilledDeliveryForm] = useState(false);
     const [deliveryDetails, setDeliveryDetails] = useState([])
 
     useMemo(() => {
         const deliveryDetails = localStorageHandler('get', 'delivery_details');
-        setIsUserFilledDeliveryForm(!deliveryDetails)
-        deliveryDetails && setDeliveryDetails(deliveryDetails)
-        
+        if ( deliveryDetails) {
+            setIsUserFilledDeliveryForm(!isUserFilledDeliveryForm)
+            setDeliveryDetails(deliveryDetails) 
+        }
     }, [])
 
     return (
         <Fade in={true}
             onDurationChange={() => 1500}>
             <section className='min-h-screen space-y-9 container px-4 mx-auto'>
-
                 {/* GoBack Button */}
                 <GoBackButton navigate={'/home'} />
 

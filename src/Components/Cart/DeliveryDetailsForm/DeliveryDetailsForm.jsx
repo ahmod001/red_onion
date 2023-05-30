@@ -18,16 +18,16 @@ const DeliveryDetailsForm = () => {
     const onSubmit = data => {
         localStorageHandler('set', 'delivery_details', data)
         setDeliveryDetails(data)
-        setIsUserFilledDeliveryForm(false)
+        setIsUserFilledDeliveryForm(!isUserFilledDeliveryForm)
     }
 
     return (
-        <div className={`col lg:order-none ${!isUserFilledDeliveryForm ? 'order-last' : 'order-first'} md:space-y-6 sm:space-y-4 space-y-5 mx-auto lg:max-w-[29rem] max-w-[25rem]`}>
+        <div className={`col lg:order-none ${isUserFilledDeliveryForm ? 'order-last' : 'order-first'} md:space-y-6 sm:space-y-4 space-y-5 mx-auto lg:max-w-[29rem] max-w-[25rem]`}>
 
             {/* Form Title */}
             <header>
                 <h1 className='lg:text-2xl text-xl '>
-                    {!isUserFilledDeliveryForm ? 'Edit ' : 'Fill '}
+                    {isUserFilledDeliveryForm ? 'Edit ' : 'Fill '}
                     Delivery Details</h1>
                 <hr className='md:mt-2 sm:mt-1.5 mt-2' />
             </header>
@@ -58,7 +58,7 @@ const DeliveryDetailsForm = () => {
                     fullWidth
                     sx={{ textTransform: 'capitalize' }}
                     color='error'>
-                    {!isUserFilledDeliveryForm ? 'Update' : 'Save & Continue'}
+                    {isUserFilledDeliveryForm ? 'Update' : 'Save & Continue'}
                 </Button>
             </form>
         </div>

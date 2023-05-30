@@ -17,7 +17,7 @@ const Footer = () => {
                     </div>
 
                     {/*  Links*/}
-                    <div className='text-gray-100 gap-y-5 grid md:grid-cols-2 lg:col-span-5 '>
+                    <div className='text-gray-100 md:gap-y-0 gap-y-4 grid md:grid-cols-2 lg:col-span-5 '>
                         <Ul links={
                             ['About online food', 'Read our blog', 'Sign up to the deliver', 'Add your restaurant']
                         } />
@@ -28,11 +28,11 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className='grid gap-y-2 lg:grid-cols-12 md:grid-cols-2 grid-cols-1'>
+                <div className='grid gap-y-9 lg:grid-cols-12 md:grid-cols-2 grid-cols-1'>
                     {/* Copyright*/}
                     <div className='col lg:col-span-7 md:text-start text-center  md:order-first order-last'>
-                        <span className='md:text-gray-300 text-gray-500 sm:text-sm text-xs'>
-                           Developed By Hasan
+                        <span className='md:text-gray-400 text-gray-500 text-xs'>
+                           Developed By Ahmod Hasan
                         </span>
                     </div>
 

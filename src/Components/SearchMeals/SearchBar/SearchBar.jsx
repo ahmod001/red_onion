@@ -1,20 +1,33 @@
 import styled from '@emotion/styled';
-import { Fab, InputBase, alpha } from '@mui/material';
+import { Fab, InputBase, alpha, useMediaQuery } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useRef } from 'react';
 import { allMeals } from "../../../assets/FakeData/FakeData";
 
-const SearchBar = ({ setSearchResults }) => {
+const SearchBar = ({ setSearchResults, setSearchBarError }) => {
     const inputRef = useRef(null);
+
+    // Media Quarry
+    const isSmallScreen = useMediaQuery('(min-width: 640px)');
 
     // Search Btn handler 
     const handleSearch = () => {
         const searchPrompt = inputRef.current.value;
 
-        setSearchResults(allMeals.filter(meal => {
-            const mealName = meal.name.toLowerCase();
-            return mealName.includes(searchPrompt.toLowerCase());
-        }))
+        if (searchPrompt) {
+
+            const results = allMeals.filter(meal => {
+                const mealName = meal.name.toLowerCase();
+                return mealName.includes(searchPrompt.toLowerCase());
+            })
+
+            if (results.length > 0) {
+                setSearchBarError('')
+                setSearchResults(results)
+            } else {
+                setSearchBarError('No matching meals!')
+            }
+        }
     }
 
     // This MUI sub-components for SearchBar
@@ -38,7 +51,7 @@ const SearchBar = ({ setSearchResults }) => {
     }));
 
     const SearchIconWrapper = styled('div')(({ theme }) => ({
-        padding: theme.spacing(0, 2),
+        padding: isSmallScreen ? theme.spacing(0, 2) : theme.spacing(0, 1.3),
         height: '100%',
         position: 'absolute',
         display: 'flex',
@@ -49,11 +62,11 @@ const SearchBar = ({ setSearchResults }) => {
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
         color: 'inherit',
         '& .MuiInputBase-input': {
-            padding: theme.spacing(1, 1, 1, 0),
+            padding: isSmallScreen ? theme.spacing(1, 1, 1, 0) : theme.spacing(0.8, 0.8, 0.8, 0),
             // vertical padding + font size from searchIcon
             paddingLeft: `calc(1em + ${theme.spacing(4)})`,
             transition: theme.transitions.create('width'),
-            width: '60%',
+            width: '70%',
             [theme.breakpoints.up('md')]: {
                 width: '25ch',
             },
@@ -63,7 +76,7 @@ const SearchBar = ({ setSearchResults }) => {
     return (
         <Search>
             <SearchIconWrapper>
-                <SearchIcon />
+                <SearchIcon fontSize={isSmallScreen ? 'medium' : 'small'} />
             </SearchIconWrapper>
 
             <StyledInputBase
@@ -74,7 +87,7 @@ const SearchBar = ({ setSearchResults }) => {
 
             {/* Search Button */}
             <Fab onClick={handleSearch}
-                sx={{ marginLeft: 'auto', px: 2, py: 2.25, textTransform: 'capitalize', boxShadow: 'none', ":active": { boxShadow: 'none' } }}
+                sx={{ marginLeft: 'auto', px: isSmallScreen ? 2 : 1.7, py: isSmallScreen ? 2.25 : 1.5, textTransform: 'capitalize', boxShadow: 'none', fontSize: isSmallScreen ? '0.9rem' : '0.8rem', ":active": { boxShadow: 'none' } }}
                 variant="extended"
                 size='small'
                 color='error'>

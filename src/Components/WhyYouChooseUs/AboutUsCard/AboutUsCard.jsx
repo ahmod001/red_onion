@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Card, CardActionArea, CardContent } from '@mui/material';
+import { Button, Card, CardActionArea, CardContent, useMediaQuery } from '@mui/material';
 import { hoverEffectStyle } from "../../Card/Card";
 
 
@@ -8,14 +8,17 @@ const AboutUsCard = ({ ourInfo }) => {
 
     const [isFullDescriptionVisible, setIsFullDescriptionVisible] = useState(false);
 
+    // Media Quarry
+    const isSmallScreen = useMediaQuery('(min-width: 640px)');
+
     return (
-        <Card sx={{ ...hoverEffectStyle, maxWidth: 365, height: 'fit-content' }}>
+        <Card sx={{ ...hoverEffectStyle, maxWidth: isSmallScreen ? 365 : 275, height: 'fit-content' }}>
             {/* Banner Img */}
             <CardActionArea>
                 <img src={banner_img} className='max-h-96 mx-auto' alt={title} />
             </CardActionArea>
 
-            <CardContent sx={{ px: 2 }}>
+            <CardContent sx={{ px: 2}}>
                 <div className='flex lg:space-x-4 space-x-3'>
 
                     {/* Icon */}

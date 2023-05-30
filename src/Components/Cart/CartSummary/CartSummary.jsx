@@ -1,5 +1,5 @@
 import { Button, Fade } from '@mui/material';
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import CartItemCard from '../CartItemCard/CartItemCard';
 import { cartContext, updateCartContext } from "../../../App";
 import { deliveryFormContext } from '../Cart';
@@ -15,8 +15,11 @@ const CartSummary = () => {
     const [deliveryDetails, setDeliveryDetails] = userDeliveryDetails;
     const [isUserFilledDeliveryForm, setIsUserFilledDeliveryForm] = isUserFilledForm;
 
-    const navigate = useNavigate();
+    // Enable Place Order button if there are items in the cart and the delivery form is filled
+    const [isPlaceOrderBtnDisable, setIsPlaceOrderBtnDisable] = useState(!isUserFilledDeliveryForm)
 
+    useMemo(() => updatedCart.length < 1 && setIsPlaceOrderBtnDisable(true), [updatedCart])
+    const navigate = useNavigate();
 
     // Generated fake estimated delivery time
     const [deliveryTime, setDeliveryTime] = useState(Math.round(Math.random() * 90) + 10)
@@ -34,7 +37,7 @@ const CartSummary = () => {
     // Order Placed Handler
     const handlePlaceOrder = () => {
         navigate('/track-order')
-        
+
         const orderDetails = {
             delivery: {
                 restaurant_location: 'The Rustic Plate Restaurant, Paris',
@@ -46,8 +49,13 @@ const CartSummary = () => {
         localStorageHandler('set', 'orderDetails', orderDetails)
     }
 
+    // Handle SnackBar 
+    const [isAnyCartItemDeleted, setIsCartItemDeleted] = useState(true);
+    const snackbarPopUpHandler = () => setIsCartItemDeleted(!isAnyCartItemDeleted)
+
     return (
-        <div className='col space-y-6 2xl:max-w-[25rem] lg:max-w-[21rem]  w-full max-w-[25rem] mx-auto'>
+        <div className='col space-y-6 2xl:max-w-[25rem] lg:max-w-[21rem] w-full max-w-[25rem] mx-auto'>
+
             {/* Delivery details */}
             <ul className="text-sm space-y-3">
                 {/* Restaurant Location */}
@@ -56,7 +64,7 @@ const CartSummary = () => {
                 {/* Estimated Delivery Time */}
                 <li>Estimated delivery time:
 
-                    {!isUserFilledDeliveryForm ?
+                    {isUserFilledDeliveryForm ?
                         ` ${deliveryTime} ` : ' ... '}
 
                     Minutes</li>
@@ -64,7 +72,7 @@ const CartSummary = () => {
                 {/* User Location */}
                 <li>To
                     <strong>
-                        {!isUserFilledDeliveryForm ?
+                        {isUserFilledDeliveryForm ?
                             ` ${deliveryDetails.address} ` : ' ... '}
                     </strong>
                 </li>
@@ -99,7 +107,7 @@ const CartSummary = () => {
             <Button
                 fullWidth
                 onClick={handlePlaceOrder}
-                disabled={isUserFilledDeliveryForm}
+                disabled={isPlaceOrderBtnDisable}
                 sx={{ textTransform: 'capitalize' }}
                 variant='contained'
                 color='error'>

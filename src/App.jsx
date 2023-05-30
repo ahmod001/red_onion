@@ -18,8 +18,11 @@ export const userContext = createContext();
 
 function App() {
 
-  // Set cart-items from LocalStorage
+  // Note: If we used 2_States for Cart to avoid unwanted bug's //
+
+  //This State used to Card_item's render only
   const getCartItemsFromLocalStorage = localStorageHandler('get', 'cart');
+  // Set cart-items from LocalStorage
   const [cart, setCart] = useState(getCartItemsFromLocalStorage ? getCartItemsFromLocalStorage : [])
 
   // This State used for Cart_summary calculation
