@@ -28,9 +28,9 @@ const SearchMeals = () => {
                 style={backgroundStyle}>
                 {/* Title */}
                 <div className='m-auto sm:space-y-5 space-y-3'>
-                    <h1 className='md:text-3xl sm:text-2xl text-xl tracking-wide font-medium'> Best food waiting for your hunger</h1>
+                    <h1 className='md:text-3xl text-center sm:text-2xl text-xl tracking-wide font-medium'> Best food waiting for your hunger</h1>
 
-                    <div className='space-y-2.5'>
+                    <div className='space-y-3'>
                         {/* SearchBar */}
                         <SearchBar
                             setSearchBarError={setSearchBarError}
@@ -39,7 +39,7 @@ const SearchMeals = () => {
                         {/* Error goes here */}
                         {searchBarError &&
                             <Fade in={true}>
-                                <h1 className='text-center font-semibold text-gray-700 tracking-wider font-sans'>
+                                <h1 className='text-center sm:text-base text-sm font-semibold text-gray-700 tracking-wider font-sans'>
                                     {searchBarError}
                                 </h1>
                             </Fade>

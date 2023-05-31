@@ -43,7 +43,7 @@ const OrderMeal = () => {
     return (
         <Fade in={true}
             onDurationChange={() => 1500}>
-            <main className='min-h-screen container lg:space-y-6 md:space-y-20 sm:space-y-20 space-y-6  px-4 mb-10 md:mb-0 mx-auto'>
+            <main className='min-h-screen container lg:space-y-6 md:space-y-20 sm:space-y-20 space-y-5 px-4 mb-10 md:mb-0 mx-auto'>
 
                 {/* If meal added successfully
                   this pop-up will be visible */}

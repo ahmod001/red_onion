@@ -51,7 +51,7 @@ const Navbar = (props) => {
             <CssBaseline />
             <ElevationScroll {...props}>
                 <AppBar sx={{ height: '3.7rem', backgroundColor: 'white' }}>
-                    <div className='flex my-auto sm:px-9 px-5 justify-between'>
+                    <div className='flex my-auto sm:px-9 px-4 justify-between'>
 
                         {/* Brand Icon*/}
                         <img onClick={() => navigate('/home')}

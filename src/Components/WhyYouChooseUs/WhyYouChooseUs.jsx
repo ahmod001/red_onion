@@ -34,10 +34,10 @@ const aboutUs = [
 const WhyYouChooseUs = () => {
     return (
         <section className='space-y-8 pt-4 lg:px-5'>
-            <div className='lg:space-y-3 space-y-2 xl:ms-5'>
-                <h1 className='lg:text-3xl text-2xl font-medium'>Why You Choose Us</h1>
-                <p className='md:text-base text-sm'>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing  <br /> elit.Nesciunt dolore, quod ipsam quos nam animi.
+            <div className='lg:space-y-3 sm:space-y-2 space-y-1  xl:ms-5'>
+                <h1 className='lg:text-3xl sm:text-2xl text-xl font-medium  sm:tracking-normal tracking-wide '>Why You Choose Us</h1>
+                <p className='md:text-base text-sm text-justify'>
+                    Lorem ipsum dolor sit amet consectetur, adipi <br/> sicing   elit.Nesciunt dolore, quod ipsam quos nam animi
                 </p>
             </div>
 

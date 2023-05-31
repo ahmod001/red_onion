@@ -24,22 +24,24 @@ const Cart = () => {
     return (
         <Fade in={true}
             onDurationChange={() => 1500}>
-            <section className='min-h-screen space-y-9 container px-4 mx-auto'>
-                {/* GoBack Button */}
-                <GoBackButton navigate={'/home'} />
+            <section className='min-h-screen '>
+                <section className='lg:space-y-9 space-y-5 container px-4 mx-auto'>
+                    {/* GoBack Button */}
+                    <GoBackButton navigate={'/home'} />
 
-                <deliveryFormContext.Provider
-                    value={{
-                        userDeliveryDetails: [deliveryDetails, setDeliveryDetails],
-                        isUserFilledForm: [isUserFilledDeliveryForm, setIsUserFilledDeliveryForm]
-                    }}>
-                    <main className='grid lg:grid-cols-2 lg:pb-10 pb-20 gap-x-8 gap-y-20'>
+                    <deliveryFormContext.Provider
+                        value={{
+                            userDeliveryDetails: [deliveryDetails, setDeliveryDetails],
+                            isUserFilledForm: [isUserFilledDeliveryForm, setIsUserFilledDeliveryForm]
+                        }}>
+                        <main className='grid lg:grid-cols-2 lg:pb-10 pb-20 gap-x-8 gap-y-20'>
 
-                        <DeliveryDetailsForm />
-                        <CartSummary />
+                            <DeliveryDetailsForm />
+                            <CartSummary />
 
-                    </main>
-                </deliveryFormContext.Provider>
+                        </main>
+                    </deliveryFormContext.Provider>
+                </section>
             </section>
         </Fade>
     );

@@ -18,7 +18,7 @@ const AboutUsCard = ({ ourInfo }) => {
                 <img src={banner_img} className='max-h-96 mx-auto' alt={title} />
             </CardActionArea>
 
-            <CardContent sx={{ px: 2}}>
+            <CardContent sx={{ px: 1.7}}>
                 <div className='flex lg:space-x-4 space-x-3'>
 
                     {/* Icon */}
