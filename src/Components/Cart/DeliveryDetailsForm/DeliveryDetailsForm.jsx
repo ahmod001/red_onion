@@ -1,6 +1,6 @@
 import React, { useContext, useMemo, useState } from 'react';
 import InputField, { Field } from '../../InputField/InputField';
-import { Button } from "@mui/material";
+import { Alert, Button, Fade, useMediaQuery } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { localStorageHandler } from '../../../assets/FakeData/FakeData';
 import { deliveryFormContext } from '../Cart';
@@ -16,7 +16,9 @@ const DeliveryDetailsForm = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-  
+    // Media Query
+    const isLargeScreen = useMediaQuery('(min-width: 1024px)')
+
     // Form Submit Handler
     const onSubmit = data => {
         localStorageHandler('set', 'delivery_details', data)
@@ -34,6 +36,15 @@ const DeliveryDetailsForm = () => {
                     Delivery Details</h1>
                 <hr className='md:mt-2 sm:mt-1.5 mt-2' />
             </header>
+
+            {/*New to the Cart Section? Show the instruction*/}
+            {!isUserFilledDeliveryForm &&
+                <Fade in={true}>
+                    <Alert color='error' icon={isLargeScreen? undefined: false} severity="info">
+                        Please complete the delivery form to place your order.
+                    </Alert>
+                </Fade>
+            }
 
             {/* Form */}
             <form action="post"

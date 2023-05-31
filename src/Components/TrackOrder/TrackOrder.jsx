@@ -6,6 +6,8 @@ import { Fade, useMediaQuery } from '@mui/material';
 const TrackOrder = () => {
     const getOrderInfo = localStorageHandler('get', 'orderDetails')
     const { delivery } = getOrderInfo;
+    console.log(encodeURIComponent(delivery.customer_location.toLowerCase()));
+    // Media Query
     const isLargeScreen = useMediaQuery('(min-width:1024px)');
 
     return (
@@ -24,12 +26,13 @@ const TrackOrder = () => {
                                 title="Google Map"
                                 className='rounded-md'
                                 width="100%"
-                                height={isLargeScreen? "440": "220"}
+                                height={isLargeScreen ? "440" : "220"}
                                 frameBorder="0"
+                                loading='lazy'
                                 scrolling="no"
                                 marginHeight="0"
                                 marginWidth="0"
-                                src="https://maps.google.com/maps?width=100%25&amp;height=100%25&amp;hl=en&amp;q=paris+(My%20Business%20Name)&amp;t=p&amp;z=9&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                                src={`https://www.google.com/maps?q=${delivery.customer_location.toLowerCase()}&output=embed`}
                             ></iframe>
                         </div>
 
