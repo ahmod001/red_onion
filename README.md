@@ -7,6 +7,7 @@ Red Onion is a feature-rich meal ordering application that provides users with a
 - Meal Ordering: Users can browse and add meals to their cart for a hassle-free ordering experience.
 - Order Tracking: The application provides a dedicated order tracking page where users can view the restaurant location on Google Maps and access detailed delivery information.
 - Search Option: Red Onion includes a search feature that allows users to search for specific meals based on their preferences.
+- Highly Responsive across all devices
 
 ## Technologies Used
 
