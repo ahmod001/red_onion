@@ -81,7 +81,6 @@ const SearchBar = ({ setSearchResults, setSearchBarError }) => {
 
             <StyledInputBase
                 inputRef={inputRef}
-                autoFocus
                 placeholder="Search meal items..."
                 inputProps={{ 'aria-label': 'search' }} />
 
