@@ -43,8 +43,7 @@ const DeliveryDetailsForm = () => {
                     <Alert color='error' icon={isLargeScreen? undefined: false} severity="info">
                         Please complete the delivery form to place your order.
                     </Alert>
-                </Fade>
-            }
+                </Fade> }
 
             {/* Form */}
             <form action="post"

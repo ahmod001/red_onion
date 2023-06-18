@@ -69,14 +69,14 @@ export const allMeals = fakeMeals.breakfast.concat(fakeMeals.lunch, fakeMeals.di
 export const localStorageHandler = (action, key, target) => {
     // Set to LocalStorage
     if (action === 'set') {
-        localStorage.setItem(key, JSON.stringify(target))
+        localStorage.setItem('redOnion_' + key, JSON.stringify(target))
     }
     // Get from LocalStorage
     else if (action === 'get') {
-        return JSON.parse(localStorage.getItem(key))
+        return JSON.parse(localStorage.getItem('redOnion_' + key))
     }
     // Remove From LocalStorage
     else if (action === 'remove') {
-        localStorage.removeItem(key)
+        localStorage.removeItem('redOnion_' + key)
     }
 }

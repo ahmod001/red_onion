@@ -29,7 +29,7 @@ function ElevationScroll(props) {
 }
 
 const Navbar = (props) => {
-    // Scroll Error Fixed
+    // Scrolling Bug Fixed
     window.scroll({ top: 0 });
 
     // Get States From Context
