@@ -2,8 +2,6 @@
 
 Red Onion is a feature-rich meal ordering application that provides users with a seamless and convenient experience. Users can add meals to their cart, track their orders, and preview their order details. The application incorporates Google Maps to display the restaurant's location and allows users to access important delivery information, such as rider details and restaurant location. Additionally, Red Onion offers a search functionality for easy meal discovery.
 
- ![red_onion_mockup](https://github.com/ahmod001/grocery/assets/121039395/788868d6-b60b-493e-93f3-7dd70e1c559b)
-
 ## Features
 
 - Meal Ordering: Users can browse and add meals to their cart for a hassle-free ordering experience.
@@ -11,6 +9,7 @@ Red Onion is a feature-rich meal ordering application that provides users with a
 - Search Option: Red Onion includes a search feature that allows users to search for specific meals based on their preferences.
 - Highly Responsive across all devices
 
+-  ![red_onion_mockup](https://github.com/ahmod001/grocery/assets/121039395/788868d6-b60b-493e-93f3-7dd70e1c559b)
 
 ## Technologies Used
 
